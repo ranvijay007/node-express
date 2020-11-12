@@ -1,11 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const dishRouter = express.Router();
+const leaderRouter = express.Router();
 
-dishRouter.use(bodyParser.json());
+leaderRouter.use(bodyParser.json());
 
-dishRouter
+leaderRouter
   .route("/")
   .all((req, res, next) => {
     res.statusCode = 200;
@@ -13,11 +13,11 @@ dishRouter
     next();
   })
   .get((req, res, next) => {
-    res.end("Will send all the dishes to you!");
+    res.end("Will send all the leaders to you!");
   })
   .post((req, res, next) => {
     res.end(
-      "Will add the dish: " +
+      "Will add the leader: " +
         req.body.name +
         " with details: " +
         req.body.description
@@ -25,31 +25,31 @@ dishRouter
   })
   .put((req, res, next) => {
     res.statusCode = 403;
-    res.end("PUT operation not supported on /dishes");
+    res.end("PUT operation not supported on /leaders");
   })
   .delete((req, res, next) => {
-    res.end("Deleting all dishes");
+    res.end("Deleting all leaders");
   });
 
-dishRouter
-  .route("/:dishId")
+leaderRouter
+  .route("/:leaderId")
   .all((req, res, next) => {
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/plain");
     next();
   })
   .get((req, res, next) => {
-    res.end("Will send the dishe of ID: " + req.params.dishId + " to you!");
+    res.end("Will send the leader of ID: " + req.params.leaderId + " to you!");
   })
   .post((req, res, next) => {
-    res.end("Will the dish: " + req.params.dishId + " added.");
+    res.end("Will the Leader: " + req.params.leaderId + " added.");
   })
   .put((req, res, next) => {
     res.statusCode = 403;
-    res.end("PUT operation not supported on DishId" + req.params.dishId);
+    res.end("PUT operation not supported on LeaderId" + req.params.leaderId);
   })
   .delete((req, res, next) => {
-    res.end("Deleting Dish of Id " + req.params.dishId);
+    res.end("Deleting Leader of Id " + req.params.leaderId);
   });
 
-module.exports = dishRouter;
+module.exports = leaderRouter;
