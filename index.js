@@ -3,8 +3,21 @@ const http = require("http");
 const morgan = require("morgan");
 const host = "localhost";
 const port = 3000;
+const mongoose = require("mongoose");
 
 const app = express();
+const Dishes = require("./models/dishes");
+
+const url = "mongodb://localhost:27017/conFusion";
+const connect = mongoose.connect(url);
+connect.then(
+  (db) => {
+    console.log("Connected correctly to server");
+  },
+  (err) => {
+    console.log(err);
+  }
+);
 
 const dishRouter = require("./routes/dishRouter");
 const promoRouter = require("./routes/promoRouter");
